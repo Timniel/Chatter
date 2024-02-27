@@ -20,7 +20,7 @@ export const Post = () => {
           <Image
             alt="Card background"
             src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            className="object-cover bg-black rounded-xl  h-[4rem] border-2 border-neutral-500"
+            className="object-cover bg-black rounded-full  h-[3rem] border-2 border-neutral-500"
             isBlurred
           />
           <div className="flex flex-col flex-1 w-full space-y-4">

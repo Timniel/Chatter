@@ -7,6 +7,7 @@ import {
   NavbarItem,
   Link,
   Input,
+  Button,
 } from "@nextui-org/react";
 import { UserDropdown } from "./DropdownTrigger";
 
@@ -63,7 +64,15 @@ export const TopBar = () => {
         </NavbarContent>
         <NavbarContent justify="end" className="col-start-4">
           <NavbarItem className="hidden lg:flex">
-            <UserDropdown />
+            <Button
+              color="default"
+              variant="flat"
+              className="text-black bg-white"
+              size="sm"
+            >
+              Make a post
+            </Button>
+            {/* <UserDropdown /> */}
           </NavbarItem>
           {/* <NavbarItem>
             <Button as={Link} color="primary" href="#" variant="flat">

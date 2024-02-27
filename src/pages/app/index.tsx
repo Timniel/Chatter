@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Icon } from "@iconify/react";
+import { Post } from "./post";
 
 export const AppPage = () => {
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("forYou");
 
   return (
-    <div className=" p-10 px-[5rem] mx-[2rem] space-y-5 border shadow-sm border-slate-200">
-      <div className="flex items-center justify-between w-full">
+    <div className="px-10 space-y-5 shadow-sm border-slate-200">
+      <Post />
+      {/* <div className="flex items-center justify-between w-full">
         <div className="space-y-3">
           <h3 className="text-3xl uppercase">Feed</h3>
           <p className="text-gray-500">Explore different content you’d love</p>
@@ -106,7 +108,7 @@ export const AppPage = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

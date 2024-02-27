@@ -5,13 +5,18 @@ import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store/index.ts";
 import { ToastProvider } from "./hooks/toast.tsx";
+import { NextUIProvider } from "@nextui-org/react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ToastProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ToastProvider>
+    <NextUIProvider>
+      <ToastProvider>
+        <Provider store={store}>
+          <main className="dark text-foreground bg-background">
+            <App />
+          </main>
+        </Provider>
+      </ToastProvider>
+    </NextUIProvider>
   </React.StrictMode>
 );

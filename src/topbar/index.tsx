@@ -10,8 +10,10 @@ import {
   Button,
 } from "@nextui-org/react";
 import { UserDropdown } from "./DropdownTrigger";
+import { useNavigate } from "react-router-dom";
 
 export const TopBar = () => {
+  const navigate = useNavigate();
   return (
     <Navbar maxWidth="full" className="py-3">
       <div className="grid w-full grid-cols-4 grid-rows-1 gap-4">
@@ -70,7 +72,7 @@ export const TopBar = () => {
               className="text-black bg-white"
               size="sm"
             >
-              Make a post
+              Post a content
             </Button>
             {/* <UserDropdown /> */}
           </NavbarItem>

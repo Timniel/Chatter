@@ -23,7 +23,7 @@ export default function CardProfile() {
           <Image
             alt="Card background"
             src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            className="object-cover bg-black rounded-3xl  h-[6rem] border-3 border-neutral-500"
+            className="object-cover bg-black rounded-3xl  h-[6rem] border-3 border-neutral-400"
             isBlurred
           />
         </div>

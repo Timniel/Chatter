@@ -33,13 +33,20 @@ export const Feed = () => {
             1 hr ago
           </Chip>
         </div>
-        <p className="text-sm font-light text-neutral-100">
-          Embarking on a journey as a product designer can be an exhilarating
-          and fulfilling experience. As a profession that bridges the realms of
-          art, technology, and problem-solving, product design offers an
-          opportunity to shape the way people interact with the world around
-          them.
+        <h2 className="text-3xl line-clamp-1">
+          Starting out as a Product designer
+        </h2>
+        <p className="text-sm font-light text-neutral-100 ">
+          <span className=" line-clamp-2">
+            Embarking on a journey as a product designer can be an exhilarating
+            and fulfilling experience. As a profession that bridges the realms
+            of art, technology, and problem-solving, product design offers an
+            opportunity to shape the way people interact with the world around
+            them.
+          </span>{" "}
+          <span className="text-blue-500 ">Read more</span>
         </p>
+
         <div className="h-40 overflow-hidden ">
           <Image
             className="w-full rounded-sm o"
@@ -94,7 +101,7 @@ export const Feed = () => {
               //   }
               className=""
             />{" "}
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <div>
                 <Button
                   color="default"
@@ -133,7 +140,7 @@ export const Feed = () => {
               >
                 Post
               </Button>{" "}
-            </div>
+            </div> */}
           </div>
         </div>
       </CardBody>

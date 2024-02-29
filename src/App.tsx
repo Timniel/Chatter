@@ -7,6 +7,7 @@ import { AuthLayout } from "./auth"; // Auth layout component
 
 import { AppLayout } from "./applayout";
 import { AppPage } from "./pages/app";
+import { Post } from "./pages/post/post";
 
 const SignIn = lazy(() => import("./auth/signin/signin"));
 // const UserDashboard = lazy(() => import("./user/dashboard")); // Let's assume you have a UserDashboard component
@@ -38,6 +39,14 @@ function App() {
               element={
                 <Suspense fallback={<Loader />}>
                   <AppPage />
+                </Suspense>
+              }
+            />{" "}
+            <Route
+              path="post"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Post />
                 </Suspense>
               }
             />

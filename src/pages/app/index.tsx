@@ -1,21 +1,28 @@
 import { useState } from "react";
 import { Icon } from "@iconify/react";
-import { Post } from "./post";
+import { Post } from "../post/post";
 import { Feed } from "./feed";
 import { ScrollShadow } from "@nextui-org/react";
+import { Filter } from "./filter";
 
 export const AppPage = () => {
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("forYou");
 
   return (
-    <div className="h-full px-10 space-y-5">
+    <div className="h-full px-10 py-1 space-y-5">
       {" "}
       {/* <Post /> */}
-      <div className="h-full shadow-sm border-slate-200">
-        <ScrollShadow className="w-full h-[61%] space-y-5" size={80}>
-          <Feed />
-          <Feed />
+      <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
+        <div className="flex items-center justify-between w-full">
+          <h2 className="py-2 text-3xl">Feeds</h2>
+          <Filter />
+        </div>
+        <ScrollShadow
+          className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
+          size={20}
+        >
+          <Feed /> <Feed />
         </ScrollShadow>
         {/* <div className="flex items-center justify-between w-full">
         <div className="space-y-3">

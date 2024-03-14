@@ -8,8 +8,11 @@ export const AuthLayout = () => {
   console.log(location.pathname);
   return (
     <div className=" h-[100dvh] w-[100dvw] flex">
-      <img src={sign} className="object-fill xl:w-[40%] w-[20%] h-full" />
-      <div className="xl:w-[60%] w-full px-[10rem] h-full flex-col flex justify-center">
+      <img
+        src={sign}
+        className="object-fill xl:w-[40%] w-[20%] h-full max-md:hidden"
+      />
+      <div className="xl:w-[60%] w-full xl:px-[10rem] h-full flex-col flex justify-center">
         <div className="w-[70%] flex flex-col justify-center self-center my-5 space-y-3">
           <div className="flex self-center justify-between w-full ">
             <button

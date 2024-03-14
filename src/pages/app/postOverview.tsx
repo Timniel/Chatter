@@ -19,13 +19,14 @@ import { Like } from "./components/like";
 import { Comment } from "./components/comment";
 import { PostComment } from "./postComment";
 import client from "../../services/client";
+import { Bookmark } from "./components/bookmark";
 
 export const PostOverview = () => {
   const location = useLocation();
 
   const [blog, setBlog] = useState<Blog | null>(location.state);
   const [comments, setComments] = useState([]);
-
+  // blog.comments.length;
   const scrollableDivRef = useRef(null);
   const endOfDivRef = useRef(null); // This will be used as the scroll target
   const lastContentRef = useRef(null);
@@ -67,7 +68,7 @@ export const PostOverview = () => {
       <CardHeader>
         <p className="text-2xl font-bold">{blog.title}</p>
       </CardHeader>
-      <CardBody className="w-full space-y-4 h-72 overflow-scroll overflow-y-auto">
+      <CardBody className="w-full space-y-4 overflow-scroll overflow-y-auto h-72">
         <div className="flex items-center justify-between space-x-1">
           <User
             as="button"
@@ -85,7 +86,7 @@ export const PostOverview = () => {
             </Chip>
           </div>
         </div>
-        <h2 className="text-3xl line-clamp-1">{blog.title}</h2>
+
         <p className="text-sm font-light text-neutral-100 ">
           <span
             className=""
@@ -109,8 +110,9 @@ export const PostOverview = () => {
           <div className="flex space-x-4 ">
             <Like blog={blog} />
             <div className="flex">
-              <Comment blog={blog} />
-            </div>
+              <Comment blog={blog} comments={comments.length} />
+            </div>{" "}
+            <Bookmark blog={blog} />
             <div className="flex">
               <Icon
                 className="w-10 h-6 font-bold"
@@ -120,10 +122,10 @@ export const PostOverview = () => {
           </div>{" "}
         </div>
         <Divider className="my-4" />
-        <div className=" w-full">
+        <div className="w-full ">
           {comments.length > 0 &&
             comments.map((comment) => (
-              <div className="flex  w-full flex-col h-20 space-x-3 ">
+              <div className="flex flex-col w-full h-20 space-x-3 ">
                 <div className="self-start ">
                   <User
                     as="button"
@@ -136,7 +138,7 @@ export const PostOverview = () => {
                     name={comment.creatorName}
                   />{" "}
                 </div>{" "}
-                <div className=" pl-10">
+                <div className="pl-10 ">
                   <p>{comment.comment}</p>
                 </div>
               </div>
@@ -153,7 +155,7 @@ export const PostOverview = () => {
               isBlurred
             />
           </div>
-          <PostComment blog={blog} />
+          <PostComment blog={blog} setComments={setComments} />
         </div>
       </CardFooter>
     </Card>

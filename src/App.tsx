@@ -10,6 +10,10 @@ import { AppPage } from "./pages/app";
 import { Post } from "./pages/post/post";
 import { PostOverview } from "./pages/app/postOverview";
 import client from "./services/client";
+import { UserDetails } from "./auth/UserDetail";
+import { Category } from "./pages/categories/categories";
+import { Bookmarks } from "./pages/bookmarks/bookmarks";
+import { Analytics } from "./pages/analytics/analytics";
 
 const SignIn = lazy(() => import("./auth/signin/signin"));
 // const UserDashboard = lazy(() => import("./user/dashboard")); // Let's assume you have a UserDashboard component
@@ -60,8 +64,40 @@ function App() {
                 </Suspense>
               }
             />
+            <Route
+              path="category/:category"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Category />
+                </Suspense>
+              }
+            />
+            <Route
+              path="bookmarks"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Bookmarks />
+                </Suspense>
+              }
+            />
+            <Route
+              path="analytics"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <Analytics />
+                </Suspense>
+              }
+            />
             {/* Add other AppLayout specific routes here */}
           </Route>
+          <Route
+            path="myprofile"
+            element={
+              <Suspense fallback={<Loader />}>
+                <UserDetails />
+              </Suspense>
+            }
+          />
         </Routes>
       </main>
     </Router>

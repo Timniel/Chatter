@@ -6,6 +6,7 @@ import {
   Image,
   Divider,
   Button,
+  Link,
 } from "@nextui-org/react";
 
 export default function CardProfile() {
@@ -35,17 +36,7 @@ export default function CardProfile() {
 
       <CardBody className="py-2 space-y-4 overflow-visible">
         {" "}
-        <div className="flex justify-between px-2 text-center">
-          <div className="flex flex-col text-center">
-            <p>1,000</p>
-            <p className="text-xs font-normal text-neutral-400">Followers</p>
-          </div>
-          <div className="flex flex-col ">
-            <p>100</p>
-            <p className="text-xs font-normal text-neutral-400">Following</p>
-          </div>
-        </div>
-        <div className="text-center ">
+        <div className="mt-12 text-center ">
           <h2 className="">John Doe</h2>
           <p className="text-xs font-light tracking-wider text-neutral-400">
             @johndoe
@@ -54,9 +45,11 @@ export default function CardProfile() {
         <p className="px-4 text-xs font-normal text-center">
           I'm a writer, Motivational speaker, Ted Talker and a Bookseller.
         </p>{" "}
-        <Divider className="my-4" />
+        <Divider className="my-4" />{" "}
         <Button color="default" variant="flat" className="">
-          My Profile
+          <Link href="/myprofile" className="">
+            My Profile{" "}
+          </Link>
         </Button>
       </CardBody>
     </Card>

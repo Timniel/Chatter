@@ -5,7 +5,7 @@ import client from "../../services/client";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
 
-export const PostComment = ({ blog }) => {
+export const PostComment = ({ blog, setComments }) => {
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
@@ -17,8 +17,12 @@ export const PostComment = ({ blog }) => {
   } = useForm();
   console.log(blog);
   const comment = async (data) => {
-    const record = await client.collection("comments").create(data);
-    console.log(record);
+    const updatedRecord = await client.collection("comments").create(data);
+    await client
+      .collection("blogs")
+      .update(data.blogId, { "comments+": updatedRecord.id });
+    console.log(updatedRecord);
+    setComments((comments) => [...comments, updatedRecord]);
   };
   const onSubmit = async (data) => {
     console.log(data);

@@ -71,7 +71,7 @@ export const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full space-y-2 ">
       {" "}
-      {label && <p className="text-sm font-light text-black/80">{label}</p>}
+      {label && <p className="text-sm font-light text-white ">{label}</p>}
       <div className={`relative w-full `}>
         {icon && iconPosition === "left" && (
           <button

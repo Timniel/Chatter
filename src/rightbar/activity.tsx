@@ -15,57 +15,45 @@ export const Activity = () => {
       className=" min-h-[80dvh] !bg-none bg-transparent border-1  border-neutral-800 p-2  "
       radius="lg"
     >
-      <div className="flex flex-col justify-between flex-grow">
-        <p className="px-4 mt-4 mb-2 text-lg font-bold">Overview</p>
+      <div className="flex flex-col flex-grow">
+        {/* <p className="px-4 mt-4 mb-2 text-lg font-bold">Overview</p>
         <Divider className="my-2" />
         <nav className="pl-5 text-neutral-200">
           <ul className="space-y-1">
-            <li className="flex items-center px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
-              <Icon icon="fa-solid:rss" className="w-4 h-4 mr-2" />
-
-              <Link to="/feed">Feed</Link>
-            </li>
-            <li className="flex items-center px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
+            <li className="flex items-center px-2 py-2 text-xs transition-colors ">
               <Icon icon="fa-solid:bookmark" className="w-4 h-4 mr-2" />
               <Link to="/bookmarks">Bookmarks</Link>
             </li>
-            <li className="flex items-center px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
-              <Icon icon="fa-brands:teamspeak" className="w-4 h-4 mr-2" />
-              <Link to="/team-blogs">Team Blogs</Link>
-            </li>
-            <li className="flex items-center px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
-              <Icon icon="fa-solid:pencil-alt" className="w-4 h-4 mr-2" />
-              <Link to="/draft">Draft</Link>
-            </li>
-            <li className="flex items-center px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
+          
+            <li className="flex items-center px-2 py-2 text-xs transition-colors ">
               <Icon icon="fa-solid:chart-line" className="w-4 h-4 mr-2" />
               <Link to="/analytics">Analytics</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         <p className="px-4 mt-4 mb-2 text-lg font-bold">
-          Trending Tags{" "}
-          <Icon icon="ph:trend-up" className="inline-block w-4 h-4 mr-2" />
+          Categories
+          {/* <Icon icon="ph:trend-up" className="inline-block w-4 h-4 mr-2" /> */}
         </p>
         <Divider className="my-2" />
         <nav className="pl-5 text-neutral-200">
           <ul>
-            <li className="px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
-              <Link to="/tags/programming">Programming</Link>
+            <li className="px-2 py-2 text-xs transition-colors ">
+              <Link to="/category/programming">Programming</Link>
             </li>
-            <li className="px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
+            <li className="px-2 py-2 text-xs transition-colors ">
               <Link to="/tags/data-science">Data Science</Link>
             </li>
-            <li className="px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
+            <li className="px-2 py-2 text-xs transition-colors ">
               <Link to="/tags/technology">Technology</Link>
             </li>
-            <li className="px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
+            <li className="px-2 py-2 text-xs transition-colors ">
               <Link to="/tags/machine-learning">Machine Learning</Link>
             </li>
-            <li className="px-2 py-2 text-xs transition-colors hover:bg-gray-700 hover:text-white">
+            <li className="px-2 py-2 text-xs transition-colors ">
               <Link to="/tags/politics">Politics</Link>
             </li>
-            <li className="px-2 py-2 text-xs text-blue-800 transition-colors hover:bg-gray-700 hover:text-white">
+            <li className="px-2 py-2 text-xs text-blue-800 transition-colors ">
               <Link to="/tags/see-all">See All</Link>
             </li>
           </ul>

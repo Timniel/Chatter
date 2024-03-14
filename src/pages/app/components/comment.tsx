@@ -2,8 +2,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-export const Comment = ({ blog }) => {
+export const Comment = ({ blog, comments }) => {
   const navigate = useNavigate();
+
   return (
     <div className="flex">
       {" "}
@@ -14,7 +15,7 @@ export const Comment = ({ blog }) => {
           onClick={() => navigate(`/blog/${blog?.id}`, { state: blog })}
         />{" "}
       </button>
-      <p className="text-xs text-neutral-400">200</p>
+      <p className="text-xs text-neutral-400">{comments}</p>
     </div>
   );
 };

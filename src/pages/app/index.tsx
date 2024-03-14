@@ -6,13 +6,14 @@ import { Filter } from "./components/filter";
 import client from "../../services/client";
 
 import { FeedSkeleton } from "../../shared/components/feedskeleton";
+import { Blog as BlogType } from "../../shared/interface";
 
 export const AppPage = () => {
   // State to keep track of the active tab
-  const [sortedBlogs, setSortedBlogs] = useState([]);
+  const [sortedBlogs, setSortedBlogs] = useState<BlogType[]>([]);
   const [activeTab, setActiveTab] = useState("forYou");
 
-  const [blogs, setBlogs] = useState(null);
+  const [blogs, setBlogs] = useState<BlogType[]>([]);
   useEffect(() => {
     if (blogs && activeTab) {
       if (activeTab === "forYou") {
@@ -23,15 +24,20 @@ export const AppPage = () => {
         );
       } else if (activeTab === "recent") {
         setSortedBlogs(
-          [...blogs].sort((a, b) => new Date(b.created) - new Date(a.created))
+          [...blogs].sort(
+            (a, b) =>
+              new Date(b.created).getTime() - new Date(a.created).getTime()
+          )
         );
       }
     }
   }, [blogs, activeTab]);
-  console.log(activeTab);
+
   const fetchBlogs = async () => {
     await client.autoCancellation(false);
-    const resultList = await client.collection("blogs").getList(1, 50, {});
+    const resultList = await client
+      .collection<BlogType>("blogs")
+      .getList(1, 50, {});
 
     setBlogs(resultList.items);
   };

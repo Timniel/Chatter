@@ -3,8 +3,12 @@ import { useState } from "react";
 import client from "../../../services/client";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
+import { Blog } from "../../../shared/interface";
 
-export const Bookmark = ({ blog }) => {
+interface BookmarkProps {
+  blog: Blog;
+}
+export const Bookmark = ({ blog }: BookmarkProps) => {
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
@@ -15,13 +19,10 @@ export const Bookmark = ({ blog }) => {
   const [bookmarks, setBookmarks] = useState(blog.bookmarks || []);
   const addBookmark = async () => {
     try {
-      console.log("data");
       const data = { "bookmarks+": userData.id };
-      console.log(data);
-      const updateBookmark = await client
-        .collection("blogs")
-        .update(blog.id, data);
-      console.log(updateBookmark);
+
+      await client.collection("blogs").update(blog.id, data);
+
       setIsBookmarkd(true);
     } catch (error) {
       console.error("Error adding bookmark:", error);
@@ -30,13 +31,10 @@ export const Bookmark = ({ blog }) => {
 
   const removeBookmark = async () => {
     try {
-      console.log("data");
       const data = { "bookmarks-": userData.id };
-      console.log(data);
-      const updateBookmark = await client
-        .collection("blogs")
-        .update(blog.id, data);
-      console.log(updateBookmark);
+
+      await client.collection("blogs").update(blog.id, data);
+
       setIsBookmarkd(false);
     } catch (error) {
       console.error("Error removing bookmark:", error);
@@ -64,7 +62,7 @@ export const Bookmark = ({ blog }) => {
       }, 0);
     }
   };
-  console.log(bookmarks);
+
   return (
     <button className="flex" onClick={handleBookmarkClick}>
       <Icon

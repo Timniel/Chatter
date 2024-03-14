@@ -1,14 +1,10 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Avatar,
-  Button,
   Card,
   CardBody,
-  CardHeader,
   Chip,
   Divider,
   Image,
-  Input,
   User,
 } from "@nextui-org/react";
 import moment from "moment";
@@ -16,10 +12,14 @@ import { useNavigate } from "react-router-dom";
 import { Like } from "../../pages/app/components/like";
 import { Comment } from "../../pages/app/components/comment";
 import { Bookmark } from "../../pages/app/components/bookmark";
+import { Blog } from "../interface";
 
-export const Feed = ({ blog }) => {
+interface FeedProps {
+  blog: Blog;
+}
+export const Feed = ({ blog }: FeedProps) => {
   const navigate = useNavigate();
-  const getFirstImageSrc = (html) => {
+  const getFirstImageSrc = (html: string) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
     const images = doc.getElementsByTagName("img");
@@ -33,6 +33,7 @@ export const Feed = ({ blog }) => {
 
     return null;
   };
+
   const imageSrc = getFirstImageSrc(blog.content);
   return (
     <Card
@@ -65,15 +66,23 @@ export const Feed = ({ blog }) => {
                 blog.content,
                 "text/html"
               );
-              const images = parsedContent.getElementsByTagName("img");
+              const elements = parsedContent.getElementsByTagName("img");
 
-              for (let i = 0; i < images.length; i++) {
-                images[i].parentNode.removeChild(images[i]);
+              for (let i = elements.length; i--; ) {
+                const img = elements[i];
+                if (img && img.parentNode) {
+                  img.parentNode.removeChild(img);
+                }
               }
 
-              return parsedContent.documentElement.textContent.trim();
+              return (
+                parsedContent &&
+                parsedContent.documentElement.textContent &&
+                parsedContent.documentElement.textContent.trim()
+              );
             })()}
           </div>
+
           <span
             className="text-blue-500 cursor-pointer "
             onClick={() => navigate(`/blog/${blog?.id}`, { state: blog })}
@@ -81,7 +90,6 @@ export const Feed = ({ blog }) => {
             Read more
           </span>
         </p>
-
         {imageSrc && (
           <div className="h-40 overflow-hidden ">
             <Image
@@ -90,7 +98,8 @@ export const Feed = ({ blog }) => {
               alt="User profile"
             />
           </div>
-        )}
+        )}{" "}
+        <Divider className="my-4" />
         <div className="flex justify-between ">
           <Chip
             variant="flat"

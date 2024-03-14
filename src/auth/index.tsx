@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import sign from "../assets/images/sign.png";
-import client from "../services/client";
 
 export const AuthLayout = () => {
   const navigate = useNavigate();

@@ -1,7 +1,6 @@
 import client from "../../services/client";
 import { useEffect, useState } from "react";
 import { ScrollShadow } from "@nextui-org/react";
-import { Filter } from "../app/components/filter";
 import { Feed } from "../../shared/components/feed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";

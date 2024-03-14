@@ -4,30 +4,35 @@ import { useForm } from "react-hook-form";
 import client from "../../services/client";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
+import { Blog, Comments } from "../interface";
 
-export const PostComment = ({ blog, setComments }) => {
+interface PostCommentProps {
+  blog: Blog;
+  setComments: (comments: Comment[]) => void;
+  scrollToContent: () => void;
+}
+
+export const PostComment = ({
+  blog,
+  setComments,
+  scrollToContent,
+}: PostCommentProps) => {
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
   }
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  console.log(blog);
-  const comment = async (data) => {
+  const { register, handleSubmit } = useForm<Comments>();
+
+  const comment = async (data: Comments) => {
     const updatedRecord = await client.collection("comments").create(data);
     await client
       .collection("blogs")
       .update(data.blogId, { "comments+": updatedRecord.id });
-    console.log(updatedRecord);
-    setComments((comments) => [...comments, updatedRecord]);
   };
-  const onSubmit = async (data) => {
-    console.log(data);
+
+  const onSubmit = async (data: Comments) => {
     if (data) {
-      const submissionData = {
+      const submissionData: Comments = {
         ...data,
         blogId: blog.id,
         creatorName: userData.name,
@@ -35,6 +40,11 @@ export const PostComment = ({ blog, setComments }) => {
         userId: userData.id,
         avatar: userData.avatar,
       };
+      setComments((comments: Comments[]) => [...comments, submissionData]);
+
+      setTimeout(() => {
+        scrollToContent();
+      }, 100);
       comment(submissionData);
     }
   };

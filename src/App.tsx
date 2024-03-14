@@ -9,14 +9,13 @@ import { AppLayout } from "./applayout";
 import { AppPage } from "./pages/app";
 import { Post } from "./pages/post/post";
 import { PostOverview } from "./pages/postOverview/postOverview";
-import client from "./services/client";
+
 import { UserDetails } from "./pages/profile/UserDetail";
 import { Category } from "./pages/categories/categories";
 import { Bookmarks } from "./pages/bookmarks/bookmarks";
 import { Analytics } from "./pages/analytics/analytics";
 
 const SignIn = lazy(() => import("./auth/signin/signin"));
-// const UserDashboard = lazy(() => import("./user/dashboard")); // Let's assume you have a UserDashboard component
 
 function App() {
   return (
@@ -57,7 +56,7 @@ function App() {
               }
             />
             <Route
-              path="blog/:id"
+              path="blog/:blogId"
               element={
                 <Suspense fallback={<Loader />}>
                   <PostOverview />

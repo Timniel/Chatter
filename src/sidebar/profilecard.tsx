@@ -8,8 +8,14 @@ import {
   Button,
   Link,
 } from "@nextui-org/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/rootReducer";
 
 export default function CardProfile() {
+  const { userData } = useSelector((state: RootState) => state.auth);
+  if (!userData) {
+    return;
+  }
   return (
     <Card
       className="py-0 pb-1 h-max !bg-none bg-transparent border-1 border-neutral-800 "
@@ -23,8 +29,8 @@ export default function CardProfile() {
         <div className="absolute top-[4rem] z-60">
           <Image
             alt="Card background"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            className="object-cover bg-black rounded-3xl  h-[6rem] border-3 border-neutral-400"
+            src={`https://pocketbase-production-60f6.up.railway.app/api/files/users/${userData.id}/${userData.avatar}`}
+            className="object-cover w-[6rem] bg-black rounded-3xl  h-[6rem] border-3 border-neutral-400"
             isBlurred
           />
         </div>
@@ -37,14 +43,12 @@ export default function CardProfile() {
       <CardBody className="py-2 space-y-4 overflow-visible">
         {" "}
         <div className="mt-12 text-center ">
-          <h2 className="">John Doe</h2>
+          <h2 className="">{userData.name}</h2>
           <p className="text-xs font-light tracking-wider text-neutral-400">
-            @johndoe
+            @{userData.username}
           </p>
         </div>
-        <p className="px-4 text-xs font-normal text-center">
-          I'm a writer, Motivational speaker, Ted Talker and a Bookseller.
-        </p>{" "}
+        <p className="px-4 text-xs font-normal text-center">{userData.bio}</p>{" "}
         <Divider className="my-4" />{" "}
         <Button color="default" variant="flat" className="">
           <Link href="/myprofile" className="">

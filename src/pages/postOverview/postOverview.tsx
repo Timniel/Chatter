@@ -15,11 +15,11 @@ import {
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Like } from "./components/like";
-import { Comment } from "./components/comment";
-import { PostComment } from "./postComment";
+import { Like } from "../app/components/like";
+import { Comment } from "../app/components/comment";
+import { PostComment } from "../../shared/components/postComment";
 import client from "../../services/client";
-import { Bookmark } from "./components/bookmark";
+import { Bookmark } from "../app/components/bookmark";
 
 export const PostOverview = () => {
   const location = useLocation();

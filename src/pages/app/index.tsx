@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
-import { Post } from "../post/post";
-import { Feed } from "./feed";
+
+import { Feed } from "../../shared/components/feed";
 import { ScrollShadow } from "@nextui-org/react";
-import { Filter } from "./filter";
+import { Filter } from "./components/filter";
 import client from "../../services/client";
-import { useNavigate } from "react-router-dom";
-import { FeedSkeleton } from "./feedskeleton";
+
+import { FeedSkeleton } from "../../shared/components/feedskeleton";
 
 export const AppPage = () => {
   // State to keep track of the active tab

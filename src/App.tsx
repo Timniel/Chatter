@@ -8,9 +8,9 @@ import { AuthLayout } from "./auth"; // Auth layout component
 import { AppLayout } from "./applayout";
 import { AppPage } from "./pages/app";
 import { Post } from "./pages/post/post";
-import { PostOverview } from "./pages/app/postOverview";
+import { PostOverview } from "./pages/postOverview/postOverview";
 import client from "./services/client";
-import { UserDetails } from "./auth/UserDetail";
+import { UserDetails } from "./pages/profile/UserDetail";
 import { Category } from "./pages/categories/categories";
 import { Bookmarks } from "./pages/bookmarks/bookmarks";
 import { Analytics } from "./pages/analytics/analytics";
@@ -87,17 +87,17 @@ function App() {
                   <Analytics />
                 </Suspense>
               }
+            />{" "}
+            <Route
+              path="myprofile"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <UserDetails />
+                </Suspense>
+              }
             />
             {/* Add other AppLayout specific routes here */}
           </Route>
-          <Route
-            path="myprofile"
-            element={
-              <Suspense fallback={<Loader />}>
-                <UserDetails />
-              </Suspense>
-            }
-          />
         </Routes>
       </main>
     </Router>

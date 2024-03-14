@@ -13,13 +13,27 @@ import {
 } from "@nextui-org/react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import { Like } from "./components/like";
-import { Comment } from "./components/comment";
-import { Bookmark } from "./components/bookmark";
+import { Like } from "../../pages/app/components/like";
+import { Comment } from "../../pages/app/components/comment";
+import { Bookmark } from "../../pages/app/components/bookmark";
 
 export const Feed = ({ blog }) => {
   const navigate = useNavigate();
+  const getFirstImageSrc = (html) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const images = doc.getElementsByTagName("img");
 
+    for (let i = 0; i < images.length; i++) {
+      const img = images[i];
+      if (img && img.src) {
+        return img.src;
+      }
+    }
+
+    return null;
+  };
+  const imageSrc = getFirstImageSrc(blog.content);
   return (
     <Card
       className="p-2  h-max !bg-none bg-transparent border-1 border-neutral-800 "
@@ -68,13 +82,15 @@ export const Feed = ({ blog }) => {
           </span>
         </p>
 
-        <div className="h-40 overflow-hidden ">
-          <Image
-            className="w-full rounded-md o"
-            src={`https://pocketbase-production-60f6.up.railway.app/api/files/4hxzmnerq40525y/${blog.id}/${blog.coverPhoto}?token=`}
-            alt="User profile"
-          />
-        </div>
+        {imageSrc && (
+          <div className="h-40 overflow-hidden ">
+            <Image
+              className="w-full rounded-md o"
+              src={imageSrc}
+              alt="User profile"
+            />
+          </div>
+        )}
         <div className="flex justify-between ">
           <Chip
             variant="flat"

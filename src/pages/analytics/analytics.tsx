@@ -1,9 +1,8 @@
-import { useParams } from "react-router-dom";
 import client from "../../services/client";
 import { useEffect, useState } from "react";
 import { ScrollShadow } from "@nextui-org/react";
-import { Filter } from "../app/filter";
-import { Feed } from "../app/feed";
+import { Filter } from "../app/components/filter";
+import { Feed } from "../../shared/components/feed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
 
@@ -58,8 +57,16 @@ export const Analytics = () => {
       <div className="h-full px-10 py-1 space-y-5">
         <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
           <div className="flex items-center justify-between w-full">
-            <h2 className="py-2 text-3xl">Bookmarks</h2>
-            <Filter />
+            <h2 className="py-2 text-3xl">Analytics</h2>
+          </div>
+          <div>
+            <h2 className="mb-2 text-2xl font-bold">Totals</h2>
+            <ul>
+              <li>Total posts: {blogs.length}</li>
+              <li>Likes: {totals.likes}</li>
+              <li>Comments: {totals.comments}</li>
+              <li>Views: {totals.views}</li>
+            </ul>
           </div>
           <ScrollShadow
             className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
@@ -71,19 +78,6 @@ export const Analytics = () => {
                 <Feed blog={topPost} />
               </div>
             )}
-            <div>
-              <h2 className="mb-2 text-2xl font-bold">Totals</h2>
-              <ul>
-                <li>Likes: {totals.likes}</li>
-                <li>Comments: {totals.comments}</li>
-                <li>Views: {totals.views}</li>
-              </ul>
-            </div>
-            <div>
-              {blogs.map((blog) => (
-                <Feed key={blog.id} blog={blog} />
-              ))}
-            </div>
           </ScrollShadow>
         </div>
       </div>

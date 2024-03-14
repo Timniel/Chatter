@@ -2,11 +2,11 @@ import { useParams } from "react-router-dom";
 import client from "../../services/client";
 import { useEffect, useState } from "react";
 import { ScrollShadow } from "@nextui-org/react";
-import { Filter } from "../app/filter";
-import { Feed } from "../app/feed";
+import { Filter } from "../app/components/filter";
+import { Feed } from "../../shared/components/feed";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
-import { FeedSkeleton } from "../app/feedskeleton";
+import { FeedSkeleton } from "../../shared/components/feedskeleton";
 
 export const Bookmarks = () => {
   const { userData } = useSelector((state: RootState) => state.auth);

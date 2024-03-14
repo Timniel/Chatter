@@ -1,5 +1,7 @@
 import PocketBase from "pocketbase";
 
-const client = new PocketBase("http://127.0.0.1:8090/");
+const client = new PocketBase(
+  "https://pocketbase-production-60f6.up.railway.app/"
+);
 
 export default client;

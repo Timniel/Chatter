@@ -9,11 +9,12 @@ import {
   Input,
 } from "@nextui-org/react";
 import Editor from "./editor";
+import MdEditor from "./MdEditor";
 
 export const Post = () => {
   return (
     <Card
-      className="p-2 min-h-[80dvh] flex flex-col  overflow-hidden !bg-none bg-transparent border-1 border-neutral-800 "
+      className="p-2 min- h-[80dvh] flex flex-col  overflow-hidden !bg-none bg-transparent border-1 border-neutral-800 "
       radius="lg"
     >
       <CardHeader>
@@ -21,56 +22,22 @@ export const Post = () => {
       </CardHeader>
       <Divider className="" />
       <CardBody className="w-full h-full overflow-hidden ">
-        {/* <Image
-            alt="Card background"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            className="object-cover bg-black rounded-full  h-[3rem] border-2 border-neutral-500"
-            isBlurred
-          /> */}
         <div className="flex flex-col justify-between w-full h-full space-y-4 ">
           <Input
             type="text"
             label="Title"
             placeholder="Enter content title"
             size="sm"
-            // className="bg-neutral-500"
+            classNames={{
+              inputWrapper:
+                "bg-[#0a0a0a] focus-within:!bg-default-200/50 hover:!bg-default-200/50 ",
+            }}
           />
           <div className="flex-1 overflow-hidden ">
             <Editor toolbar />
           </div>
 
-          {/* <Divider className="my-4" /> */}
           <div className="flex justify-end">
-            <div>
-              {/* <Button
-                  color="default"
-                  variant="flat"
-                  className=""
-                  size="sm"
-                  startContent={
-                    <Icon
-                      icon="heroicons:photo-16-solid"
-                      className="text-lg text-neutral-100"
-                    />
-                  }
-                >
-                  Photo
-                </Button>{" "}
-                <Button
-                  color="default"
-                  variant="flat"
-                  size="sm"
-                  className=""
-                  startContent={
-                    <Icon
-                      icon="heroicons:photo-16-solid"
-                      className="text-lg text-neutral-100"
-                    />
-                  }
-                >
-                  Video
-                </Button> */}
-            </div>
             <Button
               color="default"
               variant="flat"

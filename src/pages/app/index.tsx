@@ -1,30 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Post } from "../post/post";
 import { Feed } from "./feed";
 import { ScrollShadow } from "@nextui-org/react";
 import { Filter } from "./filter";
+import client from "../../services/client";
+import { useNavigate } from "react-router-dom";
 
 export const AppPage = () => {
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("forYou");
+  const [blogs, setBlogs] = useState(null);
+  const fetchBlogs = async () => {
+    await client.autoCancellation(false);
+    const resultList = await client.collection("blogs").getList(1, 50, {});
 
+    console.log(resultList);
+    setBlogs(resultList.items);
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
   return (
-    <div className="h-full px-10 py-1 space-y-5">
-      {" "}
-      {/* <Post /> */}
-      <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
-        <div className="flex items-center justify-between w-full">
-          <h2 className="py-2 text-3xl">Feeds</h2>
-          <Filter />
-        </div>
-        <ScrollShadow
-          className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
-          size={20}
-        >
-          <Feed /> <Feed />
-        </ScrollShadow>
-        {/* <div className="flex items-center justify-between w-full">
+    blogs && (
+      <div className="h-full px-10 py-1 space-y-5">
+        {" "}
+        {/* <Post /> */}
+        <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
+          <div className="flex items-center justify-between w-full">
+            <h2 className="py-2 text-3xl">Feeds</h2>
+            <Filter />
+          </div>
+          <ScrollShadow
+            className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
+            size={20}
+          >
+            {blogs.map((blog) => (
+              <Feed blog={blog} />
+            ))}
+          </ScrollShadow>
+          {/* <div className="flex items-center justify-between w-full">
         <div className="space-y-3">
           <h3 className="text-3xl uppercase">Feed</h3>
           <p className="text-gray-500">Explore different content you’d love</p>
@@ -124,7 +140,8 @@ export const AppPage = () => {
           </div>
         </div>
       </div> */}
+        </div>
       </div>
-    </div>
+    )
   );
 };

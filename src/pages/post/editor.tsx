@@ -239,7 +239,7 @@ const Editor = ({ toolbar = true, setValue, register, blog }: EditorProps) => {
           modules={toolbar ? modules : { toolbar: false }}
           formats={formats}
           className={` text-[#444] rounded-xl shadow-sm ${
-            isFullScreen ? "h-screen" : "h-[55dvh] overflow-hidden"
+            isFullScreen ? "h-screen" : "h-full overflow-hidden"
           } `}
           placeholder="Write something awesome..."
           // onChange={(content) => setValue("content", content)}

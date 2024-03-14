@@ -1,5 +1,5 @@
 import { nextui } from "@nextui-org/react";
-
+import tailwindScrollbar from "tailwind-scrollbar";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -114,5 +114,12 @@ export default {
       },
     },
   },
-  plugins: [nextui()],
+
+  plugins: [
+    nextui(),
+    tailwindScrollbar({
+      nocompatible: true,
+      preferredStrategy: "pseudoelements",
+    }),
+  ],
 };

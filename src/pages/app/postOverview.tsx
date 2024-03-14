@@ -120,12 +120,10 @@ export const PostOverview = () => {
           </div>{" "}
         </div>
         <Divider className="my-4" />
-      </CardBody>{" "}
-      <CardFooter className="flex flex-col w-full h-72">
         <div className=" w-full">
           {comments.length > 0 &&
             comments.map((comment) => (
-              <div className="flex  w-full h-20 space-x-3 ">
+              <div className="flex  w-full flex-col h-20 space-x-3 ">
                 <div className="self-start ">
                   <User
                     as="button"
@@ -138,13 +136,14 @@ export const PostOverview = () => {
                     name={comment.creatorName}
                   />{" "}
                 </div>{" "}
-                <div>
+                <div className=" pl-10">
                   <p>{comment.comment}</p>
                 </div>
               </div>
             ))}
         </div>
-
+      </CardBody>{" "}
+      <CardFooter className="flex flex-col w-full ">
         <div className="flex items-center w-full h-20 space-x-3 ">
           <div className="self-start ">
             <Image

@@ -5,14 +5,12 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Input,
   Button,
 } from "@nextui-org/react";
-import { UserDropdown } from "./DropdownTrigger";
-import { useNavigate, useLocation } from "react-router-dom";
+
+import { useLocation } from "react-router-dom";
 
 export const TopBar = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
   return (

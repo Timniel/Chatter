@@ -1,7 +1,12 @@
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import { Tabs, Tab } from "@nextui-org/react";
 
-export const Filter = ({ activeTab, setActiveTab }) => {
-  const handleTabClick = (tab) => {
+interface FilterProps {
+  activeTab: string;
+  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const Filter = ({ activeTab, setActiveTab }: FilterProps) => {
+  const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
 
@@ -12,7 +17,7 @@ export const Filter = ({ activeTab, setActiveTab }) => {
         size={"md"}
         variant={"underlined"}
         selectedKey={activeTab}
-        onSelectionChange={(key) => setActiveTab(key)}
+        onSelectionChange={(key) => setActiveTab(key as string)}
       >
         <Tab key="forYou" title="For you"></Tab>
         <Tab

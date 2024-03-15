@@ -1,8 +1,12 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import { Blog } from "../../../shared/interface";
 
-export const Comment = ({ blog, comments }) => {
+interface CommentProps {
+  blog: Blog;
+  comments: number;
+}
+export const Comment = ({ blog, comments }: CommentProps) => {
   const navigate = useNavigate();
 
   return (

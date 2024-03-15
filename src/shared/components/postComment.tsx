@@ -1,5 +1,4 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, Input, Textarea } from "@nextui-org/react";
+import { Button, Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import client from "../../services/client";
 import { useSelector } from "react-redux";

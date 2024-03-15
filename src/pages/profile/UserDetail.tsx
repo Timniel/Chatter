@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from "react";
-import PocketBase from "pocketbase";
+import React, { useState } from "react";
+
 import {
   Button,
-  Chip,
   Image,
   Input,
   Skeleton,
   Spinner,
   Textarea,
-  User,
 } from "@nextui-org/react";
 
-import { Bars2Icon, XMarkIcon } from "@heroicons/react/20/solid";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/rootReducer";
 import client from "../../services/client";
@@ -43,7 +39,7 @@ export const UserDetails = () => {
   const [isloading, setIsloading] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
@@ -82,10 +78,10 @@ export const UserDetails = () => {
     setIsloading(false);
   };
 
-  const logOut = () => {
-    client.authStore.clear();
-    navigate(`/login`);
-  };
+  // const logOut = () => {
+  //   client.authStore.clear();
+  //   navigate(`/login`);
+  // };
   return (
     <div className="flex flex-col justify-center h-full gap-6 p-5 max-lg:items-center">
       <>
@@ -98,7 +94,7 @@ export const UserDetails = () => {
                 {profileData.avatar ? (
                   <Image
                     className="w-40 h-40"
-                    src={`https://pocketbase-production-60f6.up.railway.app/api/files/users/${profileData.id}/${profileData.avatar}`}
+                    src={`${client.baseUrl}api/files/users/${profileData.id}/${profileData.avatar}`}
                   />
                 ) : (
                   <div className="flex items-center justify-center w-20 h-20 bg-white rounded-xl">
@@ -190,7 +186,7 @@ export const UserDetails = () => {
                       />
                     ) : profileData.avatar ? (
                       <Image
-                        src={`https://pocketbase-production-60f6.up.railway.app/api/files/users/${profileData.id}/${profileData.avatar}`}
+                        src={`${client.baseUrl}api/files/users/${profileData.id}/${profileData.avatar}`}
                         alt="Avatar Preview"
                         className="w-20 h-20"
                       />
@@ -273,22 +269,6 @@ export const UserDetails = () => {
             </div>
           </form>
         )}
-        {/* <div className=" z-[60] w-full justify-center flex">
-          <div className="z-50 bg-neutral-950  w-[80%] shadow-large shadow-white  flex flex-col flex-1 rounded-3xl py-10 px-[2rem] gap-3 items-center">
-            <h2 className="text-2xl font-bold text-white">My blogs</h2>
-
-            <div className="flex flex-col gap-4">
-              {blogs &&
-                blogs.map((blog) => (
-                  <div key={blog.id} className="flex flex-col gap-2">
-                    <h2 className="text-xl font-bold text-white">
-                      {blog.title}
-                    </h2>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div> */}
       </>
     </div>
   );

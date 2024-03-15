@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Avatar,
   Card,
@@ -86,7 +85,7 @@ export const PostOverview = () => {
               as="button"
               avatarProps={{
                 isBordered: true,
-                src: `https://pocketbase-production-60f6.up.railway.app/api/files/_pb_users_auth_/${blog.userId}/${blog.avatar}?token=`,
+                src: `${client.baseUrl}api/files/_pb_users_auth_/${blog.userId}/${blog.avatar}?token=`,
               }}
               className="transition-transform"
               description={`@${blog.creatorUsername}`}
@@ -125,12 +124,6 @@ export const PostOverview = () => {
                 <Comment blog={blog} comments={comments.length} />
               </div>{" "}
               <Bookmark blog={blog} />
-              {/* <div className="flex">
-                <Icon
-                  className="w-10 h-6 font-bold"
-                  icon="material-symbols-light:analytics-outline"
-                />{" "}
-              </div>{" "} */}
             </div>{" "}
           </div>
           <Divider className="my-4" />
@@ -146,7 +139,7 @@ export const PostOverview = () => {
                       as="button"
                       avatarProps={{
                         isBordered: true,
-                        src: `https://pocketbase-production-60f6.up.railway.app/api/files/_pb_users_auth_/${blog.userId}/${blog.avatar}?token=`,
+                        src: `${client.baseUrl}api/files/_pb_users_auth_/${blog.userId}/${blog.avatar}?token=`,
                       }}
                       className="transition-transform"
                       description={`@${comment.creatorUsername}`}

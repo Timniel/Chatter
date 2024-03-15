@@ -3,8 +3,12 @@ import { useState } from "react";
 import client from "../../../services/client";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/rootReducer";
+import { Blog } from "../../../shared/interface";
 
-export const Like = ({ blog }) => {
+interface LikeProps {
+  blog: Blog;
+}
+export const Like = ({ blog }: LikeProps) => {
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
@@ -13,11 +17,10 @@ export const Like = ({ blog }) => {
   const [likes, setLikes] = useState(blog.likes || []);
   const addLike = async () => {
     try {
-      console.log("data");
       const data = { "likes+": userData.id };
-      console.log(data);
-      const updateLike = await client.collection("blogs").update(blog.id, data);
-      console.log(updateLike);
+
+      await client.collection("blogs").update(blog.id, data);
+
       setIsLiked(true);
     } catch (error) {
       console.error("Error adding like:", error);
@@ -26,11 +29,10 @@ export const Like = ({ blog }) => {
 
   const removeLike = async () => {
     try {
-      console.log("data");
       const data = { "likes-": userData.id };
-      console.log(data);
-      const updateLike = await client.collection("blogs").update(blog.id, data);
-      console.log(updateLike);
+
+      await client.collection("blogs").update(blog.id, data);
+
       setIsLiked(false);
     } catch (error) {
       console.error("Error removing like:", error);
@@ -56,7 +58,7 @@ export const Like = ({ blog }) => {
       }, 0);
     }
   };
-  console.log(likes);
+
   return (
     <button className="flex" onClick={handleLikeClick}>
       <Icon

@@ -65,7 +65,7 @@ const SignIn = () => {
       unwrapResult(resultAction);
       showToast(`Logged in successful!`, "success");
       setTimeout(() => {
-        navigate(`/dashboard`);
+        navigate(`/app`);
       }, 1000);
     } catch (error) {
       showToast("Incorrect password. Please try again!", "danger");
@@ -83,7 +83,6 @@ const SignIn = () => {
       .collection("users")
       .authWithOAuth2({ provider: "google" });
     // .requestVerification("timmy9ja@gmail.com", { body: "hey" });
-    console.log(authData);
   };
   return (
     <div className="relative flex flex-col ">

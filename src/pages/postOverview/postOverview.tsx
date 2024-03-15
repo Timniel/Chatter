@@ -26,8 +26,6 @@ export const PostOverview = () => {
   const [blog, setBlog] = useState<Blog | null>(location.state);
   const [comments, setComments] = useState<CommentType[]>([]);
 
-  // blog.comments.length;
-
   const endOfDivRef = useRef(null);
   const lastContentRef = useRef<HTMLDivElement>(null);
 
@@ -60,12 +58,16 @@ export const PostOverview = () => {
     } finally {
     }
   };
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (blog) {
-      fetchReplies(blog.id);
-    } else {
-      fetchBlog();
+    if (!isMounted.current) {
+      isMounted.current = true;
+      if (blog) {
+        fetchReplies(blog.id);
+      } else {
+        fetchBlog();
+      }
     }
   }, []);
 
@@ -106,7 +108,7 @@ export const PostOverview = () => {
           <div className="flex justify-between w-full">
             <Chip
               variant="flat"
-              className="self-end "
+              className="self-end truncate max-sm:max-w-full "
               avatar={
                 <Avatar
                   name={blog.category}
@@ -115,7 +117,7 @@ export const PostOverview = () => {
                 />
               }
             >
-              {blog.category}
+              <p className="truncate ">{blog.category}</p>
             </Chip>{" "}
             <div className="flex space-x-4 ">
               <Like blog={blog} />
@@ -123,12 +125,12 @@ export const PostOverview = () => {
                 <Comment blog={blog} comments={comments.length} />
               </div>{" "}
               <Bookmark blog={blog} />
-              <div className="flex">
+              {/* <div className="flex">
                 <Icon
                   className="w-10 h-6 font-bold"
                   icon="material-symbols-light:analytics-outline"
                 />{" "}
-              </div>{" "}
+              </div>{" "} */}
             </div>{" "}
           </div>
           <Divider className="my-4" />

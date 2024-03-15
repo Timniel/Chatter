@@ -1,26 +1,32 @@
 import { useParams } from "react-router-dom";
 import client from "../../services/client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ScrollShadow } from "@nextui-org/react";
 
 import { Feed } from "../../shared/components/feed";
 import { FeedSkeleton } from "../../shared/components/feedskeleton";
+import { Blog } from "../../shared/interface";
 
 export const Category = () => {
   const { category } = useParams();
-  console.log(category);
-  const [blogs, setBlogs] = useState();
+
+  const [blogs, setBlogs] = useState<Blog[] | []>([]);
   const fetchBlogs = async () => {
     client.autoCancellation(false);
-    const records = await client.collection("blogs").getFullList({
+    const records: Blog[] = await client.collection("blogs").getFullList({
       filter: `category="${category}"`,
     });
-    console.log(records);
+
     setBlogs(records);
   };
-  console.log(blogs);
+
+  const isMounted = useRef(false);
+
   useEffect(() => {
-    fetchBlogs();
+    if (!isMounted.current) {
+      isMounted.current = true;
+      fetchBlogs();
+    }
   }, []);
   return (
     <div className="h-full px-10 py-1 space-y-5">
@@ -34,7 +40,11 @@ export const Category = () => {
           className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
           size={20}
         >
-          {blogs ? blogs.map((blog) => <Feed blog={blog} />) : <FeedSkeleton />}
+          {blogs.length > 0 ? (
+            blogs.map((blog) => <Feed blog={blog} />)
+          ) : (
+            <FeedSkeleton />
+          )}
         </ScrollShadow>
       </div>
     </div>

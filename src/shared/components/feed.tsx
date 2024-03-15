@@ -37,7 +37,7 @@ export const Feed = ({ blog }: FeedProps) => {
   const imageSrc = getFirstImageSrc(blog.content);
   return (
     <Card
-      className="p-2  h-max !bg-none bg-transparent border-1 border-neutral-800 "
+      className="p-2 w-full h-max !bg-none bg-transparent border-1 border-neutral-800 "
       radius="lg"
     >
       <CardBody className="w-full space-y-4 overflow-visible">
@@ -91,11 +91,10 @@ export const Feed = ({ blog }: FeedProps) => {
           </span>
         </p>
         {imageSrc && (
-          <div className="h-40 overflow-hidden ">
+          <div className="w-full h-40 overflow-hidden ">
             <Image
-              className="w-full rounded-md o"
+              className="object-fill w-[1000px] min-w-full rounded-md "
               src={imageSrc}
-              alt="User profile"
             />
           </div>
         )}{" "}

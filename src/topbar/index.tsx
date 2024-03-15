@@ -29,7 +29,7 @@ export const TopBar = () => {
           /> */}
         </NavbarBrand>
         <NavbarContent
-          className="flex col-span-4 space-x-5 xl:col-span-2"
+          className="flex col-span-4 space-x-1 sm:space-x-5 xl:col-span-2"
           justify="center"
         >
           <NavbarItem isActive={location.pathname === "/app"}>
@@ -49,7 +49,7 @@ export const TopBar = () => {
                   />
                 )}
                 <p
-                  className={`text-xs ${
+                  className={`text-xs max-sm:hidden  ${
                     location.pathname === "/app" ? "text-white" : ""
                   }`}
                 >
@@ -74,7 +74,7 @@ export const TopBar = () => {
                   />
                 )}
                 <p
-                  className={`text-xs ${
+                  className={`text-xs max-sm:hidden ${
                     location.pathname === "/bookmarks" ? "text-white" : ""
                   }`}
                 >
@@ -90,7 +90,7 @@ export const TopBar = () => {
                   icon="carbon:notification"
                   className="text-2xl text-neutral-500"
                 />
-                <p className="text-xs ">Notifications</p>
+                <p className="text-xs max-sm:hidden ">Notifications</p>
               </div>
             </Link>
           </NavbarItem> */}
@@ -114,7 +114,7 @@ export const TopBar = () => {
                   />
                 )}
                 <p
-                  className={`text-xs ${
+                  className={`text-xs max-sm:hidden ${
                     location.pathname === "/analytics" ? "text-white" : ""
                   }`}
                 >
@@ -133,8 +133,8 @@ export const TopBar = () => {
               size="sm"
             >
               {" "}
-              <Link href="/post" className="text-xs ">
-                Post a content
+              <Link href="/post" className="text-xs">
+                Post <span className="max-sm:hidden"> a content</span>
               </Link>
             </Button>
             {/* <UserDropdown /> */}

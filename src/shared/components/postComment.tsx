@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import client from "../../services/client";
 import { useSelector } from "react-redux";
@@ -8,7 +8,7 @@ import { Blog, Comments } from "../interface";
 
 interface PostCommentProps {
   blog: Blog;
-  setComments: (comments: Comment[]) => void;
+  setComments: React.Dispatch<React.SetStateAction<Comments[]>>;
   scrollToContent: () => void;
 }
 
@@ -48,61 +48,31 @@ export const PostComment = ({
       comment(submissionData);
     }
   };
+
   return (
     <form
       className="flex flex-col flex-1 w-full space-y-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input
+      <Textarea
         variant="flat"
-        size="xs"
+        minRows={1}
         {...register("comment")}
         type="text"
         placeholder="Write your comment"
         className=""
-      />
-      <div className="flex justify-between">
-        <div>
+        endContent={
           <Button
+            type="submit"
             color="default"
             variant="flat"
-            className=""
+            className="text-black bg-white"
             size="sm"
-            startContent={
-              <Icon
-                icon="heroicons:photo-16-solid"
-                className="text-lg text-neutral-100"
-              />
-            }
           >
-            Photo
-          </Button>{" "}
-          <Button
-            color="default"
-            variant="flat"
-            size="sm"
-            className=""
-            startContent={
-              <Icon
-                icon="heroicons:photo-16-solid"
-                className="text-lg text-neutral-100"
-              />
-            }
-          >
-            Video
+            Post
           </Button>
-        </div>
-        <Button
-          type="submit"
-          color="default"
-          variant="flat"
-          className="text-black bg-white"
-          size="sm"
-          onClick={() => handleSubmit(onSubmit)}
-        >
-          Post
-        </Button>{" "}
-      </div>
+        }
+      />
     </form>
   );
 };

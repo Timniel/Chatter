@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Feed } from "../../shared/components/feed";
 import { ScrollShadow } from "@nextui-org/react";
@@ -41,13 +41,18 @@ export const AppPage = () => {
 
     setBlogs(resultList.items);
   };
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    fetchBlogs();
+    if (!isMounted.current) {
+      isMounted.current = true;
+
+      fetchBlogs();
+    }
   }, []);
 
   return (
-    <div className="h-full px-10 py-1 space-y-5">
+    <div className="h-full py-1 space-y-5 sm:px-10">
       {" "}
       {/* <Post /> */}
       <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
@@ -59,7 +64,7 @@ export const AppPage = () => {
           className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
           size={20}
         >
-          {blogs ? (
+          {sortedBlogs.length > 0 ? (
             sortedBlogs.map((blog) => <Feed blog={blog} />)
           ) : (
             <FeedSkeleton />

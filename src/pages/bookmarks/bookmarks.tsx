@@ -1,5 +1,5 @@
 import client from "../../services/client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ScrollShadow } from "@nextui-org/react";
 import { Feed } from "../../shared/components/feed";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ export const Bookmarks = () => {
     return;
   }
 
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogs, setBlogs] = useState<Blog[] | []>([]);
 
   const fetchBlogs = async () => {
     client.autoCancellation(false);
@@ -22,12 +22,16 @@ export const Bookmarks = () => {
     });
     setBlogs(records);
   };
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    fetchBlogs();
+    if (!isMounted.current) {
+      isMounted.current = true;
+      fetchBlogs();
+    }
   }, []);
   return (
-    <div className="h-full px-10 py-1 space-y-5">
+    <div className="h-full py-1 space-y-5 sm:px-10">
       {/* <Post /> */}
       <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
         <div className="flex items-center justify-between w-full">
@@ -37,7 +41,7 @@ export const Bookmarks = () => {
           className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"
           size={20}
         >
-          {blogs ? (
+          {blogs.length > 0 ? (
             blogs.map((blog) => <Feed key={blog.id} blog={blog} />)
           ) : (
             <FeedSkeleton />

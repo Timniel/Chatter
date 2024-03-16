@@ -13,6 +13,7 @@ import RoleSelector from "./components/RoleSelector";
 import EmailAndPasswordFields from "./components/EmailAndPasswordFields";
 import SubmitButton from "./components/SubmitButton";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useState } from "react";
 
 export interface FormData {
   firstName: string;
@@ -79,20 +80,19 @@ const SignUp = () => {
     return emailCheck.length > 0;
   }
 
+  const [authGoogle, setAuthGoogle] = useState(false);
   const loginWithGoogle = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-
+    setAuthGoogle(true);
     client.authStore.clear();
-    let w = window.open() || null;
 
     await client.collection("users").listAuthMethods();
     try {
       const authData = await client.collection("users").authWithOAuth2({
         provider: "google",
         urlCallback: (url) => {
-          if (w) {
-            w.location.href = url;
-          }
+          window.open(url);
+          setAuthGoogle(false);
         },
       });
       const data = {
@@ -103,11 +103,12 @@ const SignUp = () => {
       dispatch(refreshAuthData());
       navigate(`/app`);
     } catch (error) {
-      showToast("Failed to sign up. Please try again later.", "danger");
+      showToast("Failed to sign in. Please try again later.", "danger");
+    } finally {
     }
   };
 
-  https: return (
+  return (
     <div className="relative flex flex-col ">
       <h2 className="text-2xl text-center mb-7">Register as a Writer/Reader</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full px-10">
@@ -127,7 +128,9 @@ const SignUp = () => {
             onClick={(e) => loginWithGoogle(e)}
           >
             <Icon icon="devicon:google" className="w-4 h-4 mr-1 " />
-            Sign up with Google{" "}
+            {authGoogle
+              ? "Loading Google OAuth..."
+              : " Sign up with Google"}{" "}
           </button>
         </div>
       </form>

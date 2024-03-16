@@ -16,6 +16,7 @@ import EmailInput from "./components/EmailInput";
 import PasswordInput from "./components/PasswordInput";
 import SubmitButton from "./components/SubmitButton";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useState } from "react";
 
 export interface FormData {
   email: string;
@@ -78,29 +79,29 @@ const SignIn = () => {
 
     return emailCheck.length === 1;
   }
-
+  const [authGoogle, setAuthGoogle] = useState(false);
   const loginWithGoogle = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-
+    setAuthGoogle(true);
     client.authStore.clear();
-    let w = window.open() || null;
 
     await client.collection("users").listAuthMethods();
     try {
       await client.collection("users").authWithOAuth2({
         provider: "google",
         urlCallback: (url) => {
-          if (w) {
-            w.location.href = url;
-          }
+          window.open(url);
+          setAuthGoogle(false);
         },
       });
       dispatch(refreshAuthData());
       navigate(`/app`);
     } catch (error) {
       showToast("Failed to sign in. Please try again later.", "danger");
+    } finally {
     }
   };
+
   return (
     <div className="relative flex flex-col ">
       <h2 className="text-2xl text-center mnpm run dev -7">Welcome back</h2>
@@ -119,7 +120,7 @@ const SignIn = () => {
             onClick={(e) => loginWithGoogle(e)}
           >
             <Icon icon="devicon:google" className="w-4 h-4 mr-1 " />
-            Sign in with Google{" "}
+            {authGoogle ? "Loading Google OAuth..." : "Sign in with Google"}
           </button>
         </div>
       </form>

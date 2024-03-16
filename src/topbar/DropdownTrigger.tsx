@@ -3,7 +3,6 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  User,
   Image,
 } from "@nextui-org/react";
 import { useSelector } from "react-redux";

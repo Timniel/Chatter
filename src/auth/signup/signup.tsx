@@ -85,13 +85,14 @@ const SignUp = () => {
     e.stopPropagation();
     setAuthGoogle(true);
     client.authStore.clear();
-
-    await client.collection("users").listAuthMethods();
     try {
+      let w = window.open("", "_blank");
       const authData = await client.collection("users").authWithOAuth2({
         provider: "google",
         urlCallback: (url) => {
-          window.open(url);
+          if (w && w.location) {
+            w.location.href = url;
+          }
           setAuthGoogle(false);
         },
       });

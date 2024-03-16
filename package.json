@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/browser": "^5.2.0",
+    "@capacitor/core": "^5.7.3",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@iconify/react": "^4.1.1",
     "@nextui-org/react": "^2.2.9",
     "@radix-ui/react-toast": "^1.1.5",
     "@reduxjs/toolkit": "^2.1.0",
+    "cordova-plugin-inappbrowser": "^6.0.0",
     "device-detector-js": "^3.0.3",
     "dom-parser": "^1.1.5",
     "dompurify": "^3.0.9",

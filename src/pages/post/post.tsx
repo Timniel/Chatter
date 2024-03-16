@@ -217,19 +217,19 @@ export const Post = () => {
             type="text"
             label="Title"
             placeholder="Enter title"
-            size="sm"
+            size="md"
             {...register("title")}
             classNames={{
               inputWrapper:
-                "bg-[#0a0a0a] focus-within:!bg-default-200/50 hover:!bg-default-200/50 ",
+                "bg-neutral-900 focus-within:!bg-default-200/50 hover:!bg-default-200/50 ",
             }}
           />
           <Select
             label="Select a category"
             {...register("category")}
             classNames={{
-              trigger: "bg-[#0a0a0a] text-white",
-              popoverContent: "bg-[#0a0a0a] text-white  ",
+              trigger: "bg-neutral-900 text-white",
+              popoverContent: "bg-neutral-900 text-white  ",
             }}
           >
             {categories.map((category) => (

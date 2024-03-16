@@ -64,8 +64,6 @@ export const signUp = createAsyncThunk(
         emailVisibility: true,
       });
 
-      // Here, adjust the response handling based on how PocketBase returns the registration data
-      // For this example, we will assume you get the token and the user directly
       return {
         token: client.authStore.token,
         userId: record.id,
@@ -152,7 +150,6 @@ const authSlice = createSlice({
       .addCase(signUp.rejected, (state) => {
         // Error handling similar to that of logIn
         state.status = "failed";
-        // ... setting the error message ...
       });
   },
 });

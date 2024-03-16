@@ -8,7 +8,7 @@ import client from "./../../services/client";
 import { AppDispatch } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 
-import { logIn, setLoading } from "../authSlice";
+import { logIn, refreshAuthData, setLoading } from "../authSlice";
 import { RootState } from "../../store/rootReducer";
 
 import { useToast } from "../../hooks/toast";
@@ -78,11 +78,28 @@ const SignIn = () => {
 
     return emailCheck.length === 1;
   }
-  const verify = async () => {
-    const authData = await client
-      .collection("users")
-      .authWithOAuth2({ provider: "google" });
-    // .requestVerification("timmy9ja@gmail.com", { body: "hey" });
+
+  const loginWithGoogle = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    client.authStore.clear();
+    let w = window.open() || null;
+
+    await client.collection("users").listAuthMethods();
+    try {
+      await client.collection("users").authWithOAuth2({
+        provider: "google",
+        urlCallback: (url) => {
+          if (w) {
+            w.location.href = url;
+          }
+        },
+      });
+      dispatch(refreshAuthData());
+      navigate(`/app`);
+    } catch (error) {
+      showToast("Failed to sign in. Please try again later.", "danger");
+    }
   };
   return (
     <div className="relative flex flex-col ">
@@ -94,21 +111,15 @@ const SignIn = () => {
         <EmailInput register={register} errors={errors} />
         <PasswordInput register={register} errors={errors} />
         <SubmitButton isLoading={isLoading} />
+        <p className="text-center ">Or</p>
         <div className="flex flex-col space-y-2 text-black ">
           <button
-            className="inline-flex items-center justify-center px-4 py-2 mb-1 mr-1 text-xs font-bold transition-all duration-150 ease-linear bg-white border rounded-md outline-none active:bg-blueGray-50 text-blueGray-700 focus:outline-none hover:shadow-md "
+            className="inline-flex items-center justify-center px-4 py-3 mb-1 mr-1 text-xs font-bold text-black transition-all duration-150 ease-linear rounded-md outline-none bg-neutral-200 active:bg-blueGray-50 focus:outline-none hover:shadow-md "
             type="button"
-            onClick={verify}
+            onClick={(e) => loginWithGoogle(e)}
           >
             <Icon icon="devicon:google" className="w-4 h-4 mr-1 " />
-            Sign up with Google{" "}
-          </button>
-          <button
-            className="inline-flex items-center justify-center px-4 py-2 mb-1 mr-1 text-xs font-bold transition-all duration-150 ease-linear bg-white border rounded-md outline-none active:bg-blueGray-50 text-blueGray-700 focus:outline-none hover:shadow-md "
-            type="button"
-          >
-            <Icon icon="devicon:linkedin" className="w-4 h-4 mr-1 " />
-            Sign up with Linkedin
+            Sign in with Google{" "}
           </button>
         </div>
       </form>

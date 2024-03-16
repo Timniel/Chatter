@@ -102,7 +102,7 @@ export const Input: React.FC<InputProps> = ({
           className={`bg-transparent  border ${
             error
               ? "border-danger-500"
-              : "border-[#CED4DA] placeholder:text-black/80  font-light "
+              : "border-[#CED4DA] placeholder:text-gray-500 font-light "
           }  rounded-md  h-10 w-full text-xs px-4 py-5 ${
             icon ? (iconPosition === "left" ? "pl-10" : "pr-10") : ""
           } ${className}`}
@@ -114,7 +114,7 @@ export const Input: React.FC<InputProps> = ({
           onFocus={(e) => {
             e.target.style.outlineOffset = "0px";
             e.target.style.boxShadow = `0 0 0 1px ${
-              error ? "#ff0000" : "#6699ff"
+              error ? "#ff0000" : "#fff"
             }`;
             if (onFocus) onFocus(e);
           }}

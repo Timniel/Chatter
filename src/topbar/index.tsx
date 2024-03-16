@@ -9,15 +9,18 @@ import {
 } from "@nextui-org/react";
 
 import { useLocation } from "react-router-dom";
+import { UserDropdown } from "./DropdownTrigger";
 
 export const TopBar = () => {
   const location = useLocation();
 
   return (
-    <Navbar maxWidth="full" className="py-3">
-      <div className="grid w-full grid-cols-6 grid-rows-1 gap-4 xl:grid-cols-4">
+    <Navbar maxWidth="full" className="py-3 bg-transparent">
+      <div className="grid w-full grid-cols-6 grid-rows-1 gap-4 max-xl:grid-cols-7 xl:grid-cols-4">
         <NavbarBrand className="space-x-5 max-xl:col-span-1">
-          <p className="text-4xl font-bold text-inherit"> C</p>
+          <Link href="/">
+            <p className="text-4xl font-bold text-inherit"> C</p>
+          </Link>
           {/* <Input
             type="text"
             placeholder="#   Explore"
@@ -27,11 +30,11 @@ export const TopBar = () => {
           /> */}
         </NavbarBrand>
         <NavbarContent
-          className="flex col-span-4 space-x-1 sm:space-x-5 xl:col-span-2"
+          className="flex col-span-5 space-x-1 md:col-span-4 sm:space-x-5 xl:col-span-2"
           justify="center"
         >
           <NavbarItem isActive={location.pathname === "/app"}>
-            <Link href="/app" aria-current="page">
+            <Link href="/app">
               {/* Change icons based on the active tab */}
               <div
                 className={`flex flex-col items-center space-y-1 ${
@@ -121,21 +124,36 @@ export const TopBar = () => {
               </div>
             </Link>
           </NavbarItem>
-        </NavbarContent>
-        <NavbarContent justify="end" className="col-span-1 xl:col-start-4">
-          <NavbarItem className="flex">
+          <Link href="/post" className="text-xs ">
             <Button
               color="default"
               variant="flat"
-              className="text-black bg-white"
+              className="text-black bg-white md:hidden"
               size="sm"
             >
               {" "}
-              <Link href="/post" className="text-xs">
-                Post <span className="max-sm:hidden"> a content</span>
-              </Link>
-            </Button>
-            {/* <UserDropdown /> */}
+              Post<span className="max-sm:hidden">a content</span>
+            </Button>{" "}
+          </Link>
+        </NavbarContent>
+        <NavbarContent
+          justify="end"
+          className="col-span-1 md:col-span-2 xl:col-start-4"
+        >
+          <NavbarItem className="flex items-center space-x-2">
+            {" "}
+            <Link href="/post" className="text-xs max-md:hidden">
+              <Button
+                color="default"
+                variant="flat"
+                className="text-black bg-white"
+              >
+                Post<span className="max-sm:hidden">a content</span>
+              </Button>{" "}
+            </Link>
+            <div className="md:hidden">
+              <UserDropdown />
+            </div>
           </NavbarItem>
         </NavbarContent>
       </div>

@@ -7,8 +7,10 @@ import { Blog } from "../../../shared/interface";
 
 interface BookmarkProps {
   blog: Blog;
+  bookmarks: string[];
+  setBookmarks: React.Dispatch<React.SetStateAction<string[]>>;
 }
-export const Bookmark = ({ blog }: BookmarkProps) => {
+export const Bookmark = ({ blog, bookmarks, setBookmarks }: BookmarkProps) => {
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
@@ -16,7 +18,7 @@ export const Bookmark = ({ blog }: BookmarkProps) => {
   const [isBookmarkd, setIsBookmarkd] = useState(
     blog.bookmarks.includes(userData.id)
   );
-  const [bookmarks, setBookmarks] = useState(blog.bookmarks || []);
+
   const addBookmark = async () => {
     try {
       const data = { "bookmarks+": userData.id };

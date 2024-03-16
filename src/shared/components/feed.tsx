@@ -13,11 +13,15 @@ import { Like } from "../../pages/app/components/like";
 import { Comment } from "../../pages/app/components/comment";
 import { Bookmark } from "../../pages/app/components/bookmark";
 import { Blog } from "../interface";
+import client from "../../services/client";
+import { useEffect, useState } from "react";
 
 interface FeedProps {
   blog: Blog;
 }
 export const Feed = ({ blog }: FeedProps) => {
+  const [likes, setLikes] = useState(blog.likes || []);
+  const [bookmarks, setBookmarks] = useState(blog.bookmarks || []);
   const navigate = useNavigate();
   const getFirstImageSrc = (html: string) => {
     const parser = new DOMParser();
@@ -30,24 +34,55 @@ export const Feed = ({ blog }: FeedProps) => {
         return img.src;
       }
     }
-
     return null;
   };
 
   const imageSrc = getFirstImageSrc(blog.content);
+  const [avatarSrc, setAvatarSrc] = useState<string | null>(null);
+
+  const checkImageExists = async (url: string) => {
+    const response = await fetch(url, {
+      method: "HEAD",
+      mode: "cors",
+    });
+
+    return response.status >= 200 && response.status < 300;
+  };
+
+  useEffect(() => {
+    const checkIfImageExists = async () => {
+      const url = `${client.baseUrl}api/files/_pb_users_auth_/${blog.userId}/${blog.avatar}?token=`;
+
+      if (typeof client.baseUrl !== "undefined") {
+        const imageExists = await checkImageExists(url);
+
+        if (imageExists) {
+          setAvatarSrc(`${url}`);
+        }
+      }
+    };
+
+    checkIfImageExists();
+  }, []);
+  const avatarProps = {
+    isBordered: true,
+
+    name: blog.creatorName,
+    fallback: (
+      <p className="text-lg font-bold text-white uppercase">
+        {blog.creatorName.charAt(0)}
+      </p>
+    ),
+    ...(avatarSrc && { src: avatarSrc }),
+  };
+
   return (
-    <Card
-      className="p-2 w-full h-max !bg-none bg-transparent border-1 border-neutral-800 "
-      radius="lg"
-    >
+    <Card className="w-full p-2 shadow-none h-max bg-neutral-900 " radius="lg">
       <CardBody className="w-full space-y-4 overflow-visible">
         <div className="flex items-center justify-between space-x-1">
           <User
             as="button"
-            avatarProps={{
-              isBordered: true,
-              src: `https://pocketbase-production-60f6.up.railway.app/api/files/_pb_users_auth_/${blog.userId}/${blog.avatar}?token=`,
-            }}
+            avatarProps={avatarProps}
             className="transition-transform"
             description={`@${blog.creatorUsername}`}
             name={blog.creatorName}
@@ -85,7 +120,11 @@ export const Feed = ({ blog }: FeedProps) => {
 
           <span
             className="text-blue-500 cursor-pointer "
-            onClick={() => navigate(`/blog/${blog?.id}`, { state: blog })}
+            onClick={() =>
+              navigate(`/blog/${blog?.id}`, {
+                state: { ...blog, likes, bookmarks },
+              })
+            }
           >
             Read more
           </span>
@@ -112,20 +151,27 @@ export const Feed = ({ blog }: FeedProps) => {
             }
             onClick={() => navigate(`/category/${blog?.category}`)}
           >
-            {blog.category}
+            <p className="max-sm:max-w-[25dvw] capitalize truncate ">
+              {" "}
+              {blog.category
+                .split("-")
+                .map(
+                  (category) =>
+                    category.charAt(0).toUpperCase() + category.slice(1)
+                )
+                .join(" ")}
+            </p>
           </Chip>{" "}
           <div className="flex space-x-4 ">
-            <Like blog={blog} />
+            <Like blog={blog} likes={likes} setLikes={setLikes} />
             <div className="flex">
               <Comment blog={blog} comments={blog.comments.length} />
             </div>{" "}
-            <Bookmark blog={blog} />
-            {/* <div className="flex">
-              <Icon
-                className="w-10 h-6 font-bold"
-                icon="material-symbols-light:analytics-outline"
-              />{" "}
-            </div>{" "} */}
+            <Bookmark
+              blog={blog}
+              setBookmarks={setBookmarks}
+              bookmarks={bookmarks}
+            />
           </div>{" "}
         </div>
       </CardBody>

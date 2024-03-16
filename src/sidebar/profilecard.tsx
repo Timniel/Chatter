@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/rootReducer";
+import client from "../services/client";
 
 export default function CardProfile() {
   const { userData } = useSelector((state: RootState) => state.auth);
@@ -16,27 +17,25 @@ export default function CardProfile() {
     return;
   }
   return (
-    <Card
-      className="py-0 pb-1 h-max !bg-none bg-transparent border-1 border-neutral-800 "
-      radius="lg"
-    >
+    <Card className="py-0 pb-1 shadow-none h-max b bg-neutral-900" radius="lg">
       <CardHeader className="relative flex-col w-full px-0 pt-0 pb-0">
         {/* Inline styles to control sizing */}
-        <div className="w-full overflow-hidden h-[7rem] max-h-[8rem] rounded-t-xl  bg-neutral-900">
-          <div className="absolute z-50 bg-black"></div>
-        </div>
+        <div className="w-full overflow-hidden h-[7rem] max-h-[8rem] rounded-t-xl  bg-neutral-900"></div>
+        <Divider my-4 />
         <div className="absolute top-[4rem] z-60">
-          <Image
-            alt="Card background"
-            src={`https://pocketbase-production-60f6.up.railway.app/api/files/users/${userData.id}/${userData.avatar}`}
-            className="object-cover w-[6rem] bg-black rounded-3xl  h-[6rem] border-3 border-neutral-400"
-            isBlurred
-          />
+          {userData.avatar ? (
+            <Image
+              className="object-cover w-[6rem] bg-black rounded-3xl  h-[6rem] border-3 border-neutral-400"
+              src={`${client.baseUrl}api/files/users/${userData.id}/${userData.avatar}`}
+            />
+          ) : (
+            <div className="flex items-center justify-center wobject-cover w-[6rem]   h-[6rem] border-3 border-neutral-400 bg-white rounded-full">
+              <p className="text-5xl font-bold text-black uppercase">
+                {userData.name.charAt(0)}
+              </p>
+            </div>
+          )}
         </div>
-
-        {/* <p className="font-bold uppercase text-tiny">Daily Mix</p>
-        <small className="text-default-500">12 Tracks</small>
-        <h4 className="font-bold text-large">Frontend Radio</h4> */}
       </CardHeader>
 
       <CardBody className="py-2 space-y-4 overflow-visible">
@@ -49,7 +48,7 @@ export default function CardProfile() {
         </div>
         <p className="px-4 text-xs font-normal text-center">{userData.bio}</p>{" "}
         <Divider className="my-4" />{" "}
-        <Button color="default" variant="flat" className="">
+        <Button variant="flat" className="">
           <Link href="/myprofile" className="">
             My Profile{" "}
           </Link>

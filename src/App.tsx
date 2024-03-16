@@ -14,6 +14,7 @@ import { UserDetails } from "./pages/profile/UserDetail";
 import { Category } from "./pages/categories/categories";
 import { Bookmarks } from "./pages/bookmarks/bookmarks";
 import { Analytics } from "./pages/analytics/analytics";
+import { Homepage } from "./pages/homepage";
 
 const SignIn = lazy(() => import("./auth/signin/signin"));
 
@@ -22,7 +23,7 @@ function App() {
     <Router>
       <main>
         <Routes>
-          <Route path="/" element={<Loader />} />
+          <Route path="/" element={<Homepage />} />
 
           {/* Auth Routes */}
           <Route element={<AuthLayout />}>

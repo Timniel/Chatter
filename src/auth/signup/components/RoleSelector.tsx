@@ -19,7 +19,7 @@ const RoleSelector = ({ register, errors }: RoleSelectorProps) => {
 
   return (
     <div className={`relative w-full ${errors.role ? "" : "mb-3"} space-y-2`}>
-      <label className="text-sm font-light text-black/80">
+      <label className="text-sm font-light text-white">
         You are joining as?
       </label>
 

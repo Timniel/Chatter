@@ -6,7 +6,7 @@ export const AuthLayout = () => {
   const location = useLocation();
   console.log(location.pathname);
   return (
-    <div className=" h-[100dvh] w-[100dvw] flex">
+    <div className=" h-[100dvh]  w-[100dvw] flex">
       <img
         src={sign}
         className="object-fill xl:w-[40%] w-[20%] h-full max-md:hidden"
@@ -41,15 +41,17 @@ export const AuthLayout = () => {
               </p>
             </button>
           </div>
-          <div className="flex w-full h-2 bg-blue-200 rounded-full">
+          <div className="flex w-full h-2 bg-white rounded-full">
             <div
               className={`w-1/2 h-full text-xs text-center text-white ${
-                location.pathname === "/signup" ? "bg-blue-600" : "bg-blue-200 "
+                location.pathname === "/signup"
+                  ? "bg-white  "
+                  : "bg-neutral-700"
               } rounded-full `}
             ></div>
             <div
               className={`w-1/2 h-full text-xs text-center text-white ${
-                location.pathname === "/signin" ? "bg-blue-600" : "bg-blue-200 "
+                location.pathname === "/signin" ? "bg-white " : "bg-neutral-700"
               } rounded-full `}
             ></div>
           </div>

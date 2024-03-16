@@ -7,20 +7,22 @@ import { Blog } from "../../../shared/interface";
 
 interface LikeProps {
   blog: Blog;
+  likes: string[];
+  setLikes: React.Dispatch<React.SetStateAction<string[]>>;
 }
-export const Like = ({ blog }: LikeProps) => {
+export const Like = ({ blog, likes, setLikes }: LikeProps) => {
   const { userData } = useSelector((state: RootState) => state.auth);
   if (!userData) {
     return;
   }
   const [isLiked, setIsLiked] = useState(blog.likes.includes(userData.id));
-  const [likes, setLikes] = useState(blog.likes || []);
+
   const addLike = async () => {
     try {
       const data = { "likes+": userData.id };
 
       await client.collection("blogs").update(blog.id, data);
-
+      console.log("dfdsds");
       setIsLiked(true);
     } catch (error) {
       console.error("Error adding like:", error);
@@ -32,7 +34,7 @@ export const Like = ({ blog }: LikeProps) => {
       const data = { "likes-": userData.id };
 
       await client.collection("blogs").update(blog.id, data);
-
+      console.log("dfdsds");
       setIsLiked(false);
     } catch (error) {
       console.error("Error removing like:", error);
@@ -40,6 +42,7 @@ export const Like = ({ blog }: LikeProps) => {
   };
 
   const handleLikeClick = () => {
+    console.log("dfd");
     setIsLiked((prevState) => !prevState);
 
     if (isLiked) {
@@ -67,7 +70,7 @@ export const Like = ({ blog }: LikeProps) => {
         }`}
         icon={isLiked ? "flat-color-icons:like" : "icon-park-outline:like"}
       />
-      <p className="text-xs text-neutral-400">{likes.length}</p>
+      <p className="text-xs text-neutral-400">{likes && likes.length}</p>
     </button>
   );
 };

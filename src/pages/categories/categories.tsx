@@ -34,7 +34,15 @@ export const Category = () => {
       {/* <Post /> */}
       <div className="h-full space-y-2 font-bold shadow-sm border-slate-200">
         <div className="flex items-center justify-between w-full">
-          <h2 className="py-2 text-3xl">{category}</h2>
+          <h2 className="py-2 text-3xl">
+            {category
+              ?.split("-")
+              .map(
+                (category) =>
+                  category.charAt(0).toUpperCase() + category.slice(1)
+              )
+              .join(" ")}
+          </h2>
         </div>
         <ScrollShadow
           className="w-full h-[92%] pb-10 space-y-5 [&::-webkit-scrollbar]:hidden max-md:[-ms-overflow-style:none] max-md:[scrollbar-width:none]"

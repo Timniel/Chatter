@@ -3,10 +3,7 @@ import { Card, CardBody } from "@nextui-org/react";
 export const FeedSkeleton = () => {
   return (
     <>
-      <Card
-        className="p-2  h-max !bg-none bg-transparent border-1 border-neutral-800 "
-        radius="lg"
-      >
+      <Card className="p-2 shadow-none h-max " radius="lg">
         <CardBody className="w-full space-y-4 overflow-visible animate-pulse">
           <div className="flex justify-between ">
             <div className="flex space-x-1">
@@ -41,10 +38,7 @@ export const FeedSkeleton = () => {
           </div>
         </CardBody>
       </Card>{" "}
-      <Card
-        className="p-2  h-max !bg-none bg-transparent border-1 border-neutral-800 "
-        radius="lg"
-      >
+      <Card className="p-2 shadow-none h-max " radius="lg">
         <CardBody className="w-full space-y-4 overflow-visible animate-pulse">
           <div className="flex justify-between ">
             <div className="flex space-x-1">

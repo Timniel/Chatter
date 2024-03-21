@@ -37,6 +37,7 @@ function App() {
             />
             <Route path="signup" element={<SignUp />} />
           </Route>
+
           {/* Application Routes */}
           <Route element={<AppLayout />}>
             <Route

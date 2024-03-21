@@ -43,6 +43,7 @@ const SignUp = () => {
 
     const submissionData = {
       ...data,
+      name: data.firstName + " " + data.lastName,
       email: data.email.toLowerCase(),
     };
 

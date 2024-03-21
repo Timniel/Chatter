@@ -18,8 +18,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Jest types */
+    "types": ["jest"] // Include Jest types here
   },
-  "include": ["src"],
+  "include": ["src", "src/**/*.ts", "src/**/*.tsx", "./setupTest.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

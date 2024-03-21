@@ -86,35 +86,35 @@ const Toast = forwardRef<
   let margin = 16;
 
   const toastBgColorClasses = {
-    success: "bg-success-800",
+    success: "bg-[#171717]",
     warning: "bg-warning-800",
     danger: "bg-danger-800",
     normal: "bg-gray-800",
   };
 
   const toastBorderColorClasses = {
-    success: "border-success-600",
+    success: "border-[#d4d4d4]",
     warning: "border-warning-600",
     danger: "border-danger-600",
     normal: "border-gray-600",
   };
 
   const textColorClasses = {
-    success: "text-success-500",
+    success: "text-white",
     warning: "text-warning-500",
     danger: "text-danger-500",
     normal: "text-gray-500", // Default
   };
 
   const hoverBgColorClasses = {
-    success: "hover:bg-success-700/30",
+    success: "hover:bg-[#171717]",
     warning: "hover:bg-warning-700/30",
     danger: "hover:bg-danger-700/30",
     normal: "hover:bg-gray-800/30",
   };
 
   const hoverTextColorClasses = {
-    success: "hover:text-success-300",
+    success: "hover:text-white",
     warning: "hover:text-warning-300",
     danger: "hover:text-danger-300",
     normal: "hover:text-gray-300",

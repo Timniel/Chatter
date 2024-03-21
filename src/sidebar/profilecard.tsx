@@ -1,15 +1,8 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Image,
-  Divider,
-  Button,
-  Link,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Image, Divider } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/rootReducer";
 import client from "../services/client";
+import { ProfileButton } from "./ui/ProfileButton";
 
 export default function CardProfile() {
   const { userData } = useSelector((state: RootState) => state.auth);
@@ -47,12 +40,8 @@ export default function CardProfile() {
           </p>
         </div>
         <p className="px-4 text-xs font-normal text-center">{userData.bio}</p>{" "}
-        <Divider className="my-4" />{" "}
-        <Button variant="flat" className="">
-          <Link href="/myprofile" className="">
-            My Profile{" "}
-          </Link>
-        </Button>
+        <Divider className="my-4" />
+        <ProfileButton />
       </CardBody>
     </Card>
   );

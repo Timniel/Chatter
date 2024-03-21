@@ -5,6 +5,7 @@ const BtnLoader = ({ label, icon }: { label?: string; icon?: string }) => (
     <Icon
       icon={icon ? icon : "eos-icons:bubble-loading"}
       className="w-4 h-4 text-[#AEB9E1]"
+      data-testid="custom-icon"
     />
 
     <span className="inline-block "> {label ? label : "Loading"} ...</span>
